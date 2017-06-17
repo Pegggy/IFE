@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>task4:JS practice 1</title>
+</head>
+<style type="text/css">
+	li{list-style: none;display: inline-block;background: #c00;;margin: 3px;width: 10px;}
+</style>
+<body>
+<div id="operate">
+	<input type="number" name="number" id="value">
+	<input type="button" id="leftInsert"  value = "左侧入">
+	<input type="button" id="rightInsert" value = "右侧入">
+	<input type="button" id="delLeft" value = "左侧出">
+	<input type="button" id="delRight" value = "右侧出">
+	<input type="button" id="resort" value="排序">
+</div>
+<div id="list"></div>
+<script type="text/javascript">
+	var list = document.getElementById('list');
+	var ul = document.createElement('ul');
+	list.appendChild(ul);
+	var maxLen = 60;
+	var inputNumber = document.getElementById('value');
+	// 检查输入是否为数字
+	function checkNum(inputNumber){
+		if(inputNumber.value ===''||!(/^[0-9]+$/).test(inputNumber.value)){
+			alert('请输入一个数字！');
+				// 没输入数字时返回undefined
+		}else if(inputNumber.value >=10 && inputNumber.value <=100){
+				return inputNumber.value;
+		}else{
+				alert('请输入10-100内的数字！');
+		}
+	}
+	function checkQualities(){
+		if(ul.childNodes.length > maxLen-1){
+			alert('最多输入60个数字，已到达上限！');
+			return true;
+		}
+	}
+	var leftInsert = document.getElementById('leftInsert');
+	var rightInsert = document.getElementById('rightInsert');
+	var delLeft = document.getElementById('delLeft');
+	var delRight = document.getElementById('delRight');
+	var resort = document.getElementById('resort');
+	leftInsert.onclick = appendLeft;
+	rightInsert.onclick = appendRight;
+	delLeft.onclick = leftDel;
+	delRight.onclick = rightDel;
+	resort.onclick = resetList;
+	// 左侧加入方块
+	function appendLeft(){
+		if(checkQualities()) return;
+		var value = checkNum(inputNumber);
+		if(value !== undefined){
+			var li = document.createElement('li');
+			li.style.height = value +'px';
+			if(!ul.childNodes[0]){
+				return ul.appendChild(li);
+			}else{
+				return ul.insertBefore(li,ul.firstChild);
+			}	
+		}	
+	}
+	// 右侧加入方块
+	function appendRight(){
+		if(checkQualities()) return;
+		var value = checkNum(inputNumber);
+		if(value !== undefined){
+			var li = document.createElement('li');
+			li.style.height = value +'px';
+			return ul.appendChild(li);
+		}
+	}
+	// 左边删除方块
+	function leftDel(){
+		var  firstDel = ul.removeChild(ul.firstChild);
+		alert('左边第一个矩形被移出！');
+	}
+	// 右侧删除方块
+	function rightDel(){
+		var lastDel = ul.removeChild(ul.lastChild);
+		alert('右边第一个矩形被移出！');
+	}
+
+	function resetList(){
+		var li = document.getElementsByTagName('li');
+		// 获取所有矩形元素
+		var len = li.length;
+		var listHeight = [];
+		// 把矩形元素的高度取出来
+		for(var i = 0 ;i <len;i++){
+			listHeight.push(parseInt(li[i].style.height));
+		}
+		var newHeight = listHeight.sort(function(a,b){
+			return a-b;
+		});
+		// 对矩形元素高度从小到大进行排序
+		for(var i = 0 ;i<len;i++){
+			li[i].style.height = newHeight[i]+'px';
+		}
+	}
+	//点击任意方块时删除该方块 
+	ul.onclick = function(e){
+		ul.removeChild(event.target);
+	}
+</script>
+</body>
+</html>

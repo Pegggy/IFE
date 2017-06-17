@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>task4:JS practice 1</title>
+</head>
+<style type="text/css">
+	li{list-style: none;display: inline-block;background: #c00;color:#fff;padding: 3px;margin: 5px;}
+</style>
+<body>
+<div id="operate">
+	<input type="number" name="number" id="value">
+	<input type="button" id="leftInsert"  value = "左侧入">
+	<input type="button" id="rightInsert" value = "右侧入">
+	<input type="button" id="delLeft" value = "左侧出">
+	<input type="button" id="delRight" value = "右侧出">
+</div>
+<div id="list"></div>
+<script type="text/javascript">
+	var list = document.getElementById('list');
+	var ul = document.createElement('ul');
+	list.appendChild(ul);
+	var inputNumber = document.getElementById('value');
+	// 检查输入是否为数字
+	function checkNum(inputNumber){
+		if(inputNumber.value ===''||!(/^[0-9]+$/).test(inputNumber.value)){
+			alert('请输入一个数字！');
+			// 没输入数字时返回undefined
+		}else{
+			return inputNumber.value;
+	}
+}
+	var leftInsert = document.getElementById('leftInsert');
+	var rightInsert = document.getElementById('rightInsert');
+	var delLeft = document.getElementById('delLeft');
+	var delRight = document.getElementById('delRight');
+	leftInsert.onclick = appendLeft;
+	rightInsert.onclick = appendRight;
+	delLeft.onclick = leftDel;
+	delRight.onclick = rightDel;
+
+	// 左侧加入数字
+		function appendLeft(){
+		var value = checkNum(inputNumber);
+		if(value !== undefined){
+			var li = document.createElement('li');
+			li.innerHTML = value ;
+			if(!ul.childNodes[0]){
+				return ul.appendChild(li);
+			}else{
+				return ul.insertBefore(li,ul.firstChild);
+			}	
+		}	
+	}
+	// 右侧加入数字
+		function appendRight(){
+		var value = checkNum(inputNumber);
+		if(value !== undefined){
+			var li = document.createElement('li');
+			li.innerHTML = value ;
+			return ul.appendChild(li);
+		}
+	}
+	// 左边删除数字
+		function leftDel(){
+			var  firstDel = ul.removeChild(ul.firstChild);
+			alert('左边第一个数字'+firstDel.innerText+'被移出！');
+		}
+	// 右侧删除数字
+		function rightDel(){
+			var lastDel = ul.removeChild(ul.lastChild);
+			alert('右边第一个数字'+lastDel.innerText+'被移出！');
+		}
+	
+
+	//点击任意数字时删除该元素 
+		ul.onclick = function(e){
+			ul.removeChild(event.target);
+		}
+
+</script>
+</body>
+</html>

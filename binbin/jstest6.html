@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<meta charset="utf-8">
+	<title>任务六：基础JavaScript练习</title>
+	<style type="text/css">
+	span{background: #c00;color:#fff;margin: 5px;padding: 3px;}
+	.highlight{background: orange;}
+	</style>
+</head>
+<body>
+	<textarea rows="4" cols = "20" name="input" id="mulInput">
+	</textarea>
+	<input type="button" name="input" id="inputBtn" value="输入">
+	<input type="text" name="research" id="searchVal">
+	<input type="button" name="research" id="searchBtn" value="查找">
+	<div id="showArea">
+		
+	</div>
+<script type="text/javascript">
+	var inputBtn = document.getElementById('inputBtn');
+	var searchBtn = document.getElementById('searchBtn');
+	var showArea = document.getElementById('showArea');
+
+	inputBtn.onclick = function(){
+		var input = document.getElementById('mulInput').value;
+		var reg = /[\s\n\f\r\t,+.+\\+，+。+、+；+\;\/+]/gi;
+		var str = input.split(reg);
+		str = str.filter(notNull);
+		var length = str.length;
+		for(var i = 0;i<length;i++){
+			var span = document.createElement('span');
+			span.innerHTML= str[i];
+			showArea.appendChild(span);
+		}
+		console.log(str);
+	}
+
+	function notNull(element){
+			return element != '';
+	}
+	searchBtn.onclick = function(){
+		var search = document.getElementById('searchVal').value;
+		var showChilds = showArea.children;
+		var reg = new RegExp(search);
+		var len = showChilds.length;
+		var str = [];
+		for(var i = 0; i<len;i++){
+			str.push(showChilds[i].innerText);
+		}
+		for(var j = 0;j<len;j++){
+			if(reg.test(str[j])){
+				showChilds[j].setAttribute("class","highlight");
+			}
+		}
+	}
+	
+</script>
+</body>
+</html>
+
