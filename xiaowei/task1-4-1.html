@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>Task 1-4-1</title>
+	<style type="text/css">
+		.main{width: 400px;height: 200px;background: #ccc;
+			top: 50%;left: 50%;margin-left:-200px;margin-top:-100px;position: absolute;overflow: hidden;}
+		.circle1{position: absolute;width:100px;height:100px;top:-50px;left: -50px;border-radius: 50%;background: yellow;}
+		.circle2{position: absolute;width:100px;height:100px;bottom:-50px;right:-50px;border-radius: 50%;background: yellow;}
+	</style>
+</head>
+<body>
+<!-- main位于页面正中间，无论是水平方向还是竖直方向。circle分别位于main的左上角和右下角，随着main而动。
+main设置成绝对定位，top和left都是页面的50%，把矩形中心放于页面中心即可，即将margin-left和margin-top分别向右向上移动矩形的一半。
+ -->	
+	<div class="main">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+	</div>
+</body>
+</html>
