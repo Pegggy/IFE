@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>表单验证</title>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		label{font-size: 16px;margin: 15px;line-height: 24px;color:#555;width: 70px;display: inline-block;}
+		input{font-size: 22px;margin: 10px;border-radius: 3px;border:1px solid #ccc;}
+		#btn{font-size: 18px;background: #0066CC;color:#fff;border:none;padding-left: 15px;padding-right: 15px;margin-left: 270px;}
+		div{font-size: 14px;margin-left: 110px;}
+		.red{color:#c00;}
+		.gray{color:#ccc;}
+		.green{color: green;}
+	</style>
+</head>
+<body>
+<form action="POST">
+	<label>名称</label>
+	<input type="text" name="username" id="username">
+	<div id="info_name"></div>
+	<label>密码</label>
+	<input type="password" name="password" id="password">
+	<div id="info_password"></div>
+	<label>密码确认</label>
+	<input type="password" name="confirm" id="confirm">
+	<div id="info_confirm"></div>
+	<label>邮箱</label>
+	<input type="email" name="email" id="email">
+	<div id="info_email"></div>
+	<label>手机</label>
+	<input type="text" name="phone" id="phone">
+	<div id="info_phone"></div>
+	<input type="submit" name="username" value="验证" id="btn">
+</form>	
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	var info = document.getElementById('info');
+	var username = document.getElementById('username');
+	var password = document.getElementById('password');
+	var confirm = document.getElementById('confirm');
+	var email = document.getElementById('email');
+	var phone = document.getElementById('phone');
+ //检查用户名
+	username.onblur = function(){
+		var username_val = document.getElementById('username').value;
+		var arr_name = username_val.split('');
+		var info_name = document.getElementById('info_name');
+		var num = 0;
+		var len = arr_name.length;
+		if(username_val == ""){
+			info_name.innerText='姓名不能为空';
+			setBorder(false,username,info_name);
+			return false;
+		}else{		
+			for(var i = 0;i < len;i++){
+				if(/^[a-zA-Z0-9]$/g.test(arr_name[i])){
+					num += 1;
+				}else{
+					num += 2;
+				}
+			}
+			if(num < 4 || num > 16){
+				info_name.innerText='必填，长度为4~16个字符';
+				setBorder(false,username,info_name);
+				return false;
+			}else {
+				info_name.innerText='格式正确';
+				setBorder(true,username,info_name);
+				return true;
+			}
+		}
+	}
+	password.onblur = function(){
+		var password_val = password.value;
+		var info_password = document.getElementById('info_password');
+		if(password_val == ""){
+			info_password.innerText = '请输入8~16位密码，空格键除外';
+			setBorder(false,password,info_password);
+			return false;
+		}else{
+			if(/\w{8,16}/.test(password_val)){
+				info_password.innerText = '密码可用';
+				setBorder(true,password,info_password);
+				return true;	
+			}else{
+				info_password.innerText = '密码不可用';
+				setBorder(false,password,info_password);
+				return false;	
+			}
+		}
+	}
+	confirm.onblur = function(){
+		var confirm_val = confirm.value;
+		var info_confirm = document.getElementById('info_confirm');
+		if(confirm_val === password.value){
+			info_confirm.innerText = '密码输入正确';
+			setBorder(true,confirm,info_confirm);
+			return true;	
+		}else{
+			info_confirm.innerText = '两次密码输入不一致';
+			setBorder(false,confirm,info_confirm);
+			return false;
+		}
+	}
+	email.onblur = function(){
+		var email_val = email.value;
+		var info_email = document.getElementById('info_email');
+		var reg = /^[a-zA-Z0-9_]+@\w+\.[a-zA-Z0-9]+$/g;
+		if(reg.test(email_val)){
+			info_email.innerText = '邮箱输入正确';
+			setBorder(true,email,info_email);
+			return true;
+		}else{
+			info_email.innerText = '邮箱输入错误';
+			setBorder(false,email,info_email);
+			return false;
+		}
+	}
+	phone.onblur = function(){
+		var info_phone = document.getElementById('info_phone');
+		var phone_val = phone.value;
+		var reg_p = /^1[3|4|5|7|8|9]\d{9}$/;
+		if (reg_p.test(phone_val)) {
+			info_phone.innerText = '手机号输入正确';
+			setBorder(true,phone,info_phone);
+			return true;
+		}else{
+			info_phone.innerText = '手机号输入错误';
+			setBorder(false,phone,info_phone);
+			return false;
+		}			
+	}
+	btn.onclick = function(){
+		var result = username.onblur()&&password.onblur()&&confirm.onblur()&&email.onblur()&&phone.onblur();
+		if(result){
+			alert('提交成功');
+		}else{
+			alert('填写有误，提交失败');
+		}
+	}
+	function setBorder(boolean,element,info){
+		if(boolean){
+			info.setAttribute('class','green');
+			element.style.border = '1px solid green';
+		}else{
+			info.setAttribute('class','red');
+			element.style.border = '1px solid red';
+		}
+	}
+</script>
+</body>
+</html>

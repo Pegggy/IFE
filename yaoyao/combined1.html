@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>表单格式验证</title>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		span{font-size: 16px;margin: 15px;line-height: 24px;color:#555;}
+		input{font-size: 22px;margin: 10px;border-radius: 3px;}
+		#btn{font-size: 18px;background: #0066CC;color:#fff;border:none;padding: 3px;}
+		#info{font-size: 14px;margin-left: 75px;}
+		.red{color:#c00;}
+		.gray{color:#ccc;}
+	</style>
+</head>
+<body>
+<span>名称</span>
+<input type="text" name="username" id="username">
+<input type="button" name="username" value="验证" id="btn">
+<div id="info"></div>
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	var info = document.getElementById('info');
+	btn.onclick = function(){
+		var username = document.getElementById('username').value;
+		var arr_name = username.split('');
+		var num = 0;
+		var len = arr_name.length;
+		if(username == ""){
+			info.innerText='姓名不能为空';
+			info.setAttribute('class','red');
+			document.getElementById('username').style.border = '1px solid #c00';
+		}else{		
+			for(var i = 0;i < len;i++){
+				if(/[a-zA-Z0-9]/g.test(arr_name[i])){
+					num += 1;
+				}else{
+					num += 2;
+				}
+			}
+			if(num < 4 || num > 16){
+				info.innerText='必填，长度为4~16个字符';
+				info.setAttribute('class','red');
+				document.getElementById('username').style.border = '1px solid #c00';
+			}else {
+				info.innerText='格式正确';
+				info.setAttribute('class','green');
+				document.getElementById('username').style.border = '1px solid green';
+			}
+		}
+	}
+
+</script>
+</body>
+</html>

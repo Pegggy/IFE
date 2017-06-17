@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>表单联动</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		form{text-align: center;margin-top: 30px;}
+		.hide{display: none;}
+		.show{display: inline-block;}
+	</style>
+</head>
+<body>
+<form>
+	<label><input type="radio" name="status" id="student" onchange="change()"> 在校大学生 </label>
+	<label><input type="radio" name="status" id="work" onchange="change()"> 非在校生 </label>
+	<br>
+		<div id="colleges" class="hide">
+			<label for="place">学校</label>
+			<select name="place"  id="place" onchange="checkUni()">
+				<option value="北京">北京</option>
+				<option value="天津">天津</option>
+				<option value="上海">上海</option>
+				<option value="浙江">浙江</option>
+				<option value="江苏">江苏</option>
+			</select>
+			<select class="show" id = "universities">
+				<option value="北京大学">北京大学</option>
+				<option value="清华大学">清华大学</option>
+			</select>
+		</div>	
+		<div id="works" class="hide">
+			<label for="company">就业单位</label>
+			<input type="text" name="company">
+		</div>
+</form>
+<script type="text/javascript">
+	var student = document.getElementById('student');
+	var uni_list = [['清华大学','北京大学'],['天津大学','南开大学'],['复旦大学','交通大学'],['浙江大学','浙江工业大学'],['南京大学','东南大学']];
+	function change(){
+		if(student.checked){
+		document.getElementById('colleges').setAttribute('class','show');
+		document.getElementById('works').setAttribute('class','hide');
+		}
+		else{
+		document.getElementById('colleges').setAttribute('class','hide');
+		document.getElementById('works').setAttribute('class','show');
+		}
+	}
+	function checkUni(){
+		var place = document.getElementById('place');
+		var index = place.selectedIndex;
+		var universities = document.getElementById('universities');
+		if(index>=0){
+			universities.innerHTML = '';
+			for(var i = 0 ;i < uni_list[index].length;i++){
+			var option = document.createElement('option');
+			option.setAttribute('value',uni_list[index][i]);
+			option.innerText = uni_list[index][i];
+			universities.appendChild(option);
+			}
+		}
+	}
+</script>
+</body>
+</html>
