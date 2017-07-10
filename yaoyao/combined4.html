@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>听指令的小方块1</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;box-sizing:border-box;}
+		table{border-collapse: collapse;}
+		.xpos{margin-left: 50px;}
+		.xpos td{width: 50px;height: 50px;text-align: center;}
+		.ypos{float: left;}
+		.ypos td{width: 50px;height: 50px;text-align: center;}
+		.table{margin-left: 50.4px;position: relative;}
+		.table table{border-top: 1px solid #ccc;border-left: 1px solid #ccc;box-sizing:border-box;}
+		.table tr{width: 500px;height: 50px;display: block;}
+		.table td{width: 50px;height:50px;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;}
+		.table #red{width: 50px;height: 50px;position: absolute;background: red;z-index: 1; }
+		.table #blue{width: 50px;height: 10px;position: absolute;background: blue;z-index: 2;}
+		.hide{display: none;}
+	</style>
+</head>
+<body>
+<div class="xpos">
+<table>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="ypos">
+<table>
+	<tbody>
+		<tr>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>7</td>
+		</tr>
+		<tr>
+			<td>8</td>
+		</tr>
+		<tr>
+			<td>9</td>
+		</tr>
+		<tr>
+			<td>10</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="table">
+<table cellpadding="0" cellspacing="0" border="0">
+	<div class="hide" id="red" style="left:300px;top: 300px;">
+		<div id="blue"></div>
+	</div>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<button id="start">START</button>
+<button id="go">GO</button>
+<button id="left">TUN LEF</button>
+<button id="right">TUN RIG</button>
+<button id="back">TUN BAC</button>
+<script type="text/javascript">
+		var start = document.getElementById('start');
+		var go = document.getElementById('go');
+		var tleft = document.getElementById('left');
+		var tright = document.getElementById('right');
+		var tback = document.getElementById('back');
+		var block = document.getElementById('red');
+		var blockWidth = 50;
+		var blockHeight = 50;
+		var deg = 0 ;
+		start.onclick = function (){
+			block.className = '';
+		};
+		tleft.onclick = function(){
+			chgdeg(block,-90);
+		};
+		tright.onclick = function(){
+			chgdeg(block,90);
+		}
+		tback.onclick = function(){
+			chgdeg(block,-180);
+		}
+		function chgdeg(ele,chgdeg){
+			deg += chgdeg;
+			ele.style.transform = "rotate("+deg+"deg)";
+		}
+		go.onclick = function(){
+			move(block,deg);
+		}
+		function move(ele,deg){
+			var direction = deg % -360;
+			var eleft = parseInt(ele.style.left);
+			var etop = parseInt(ele.style.top);
+			
+			if(direction == 0){
+				ele.style.top = etop-blockHeight +'px';
+			}if(direction == 90 ||direction == -270){
+				ele.style.left = eleft+blockWidth +'px';
+			}if(direction == -90){
+				ele.style.left = eleft-blockWidth +'px';
+			}if(direction ==-180){
+				ele.style.top = etop+blockHeight +'px';
+			}
+		}
+	
+</script>
+</body>
+</html>
