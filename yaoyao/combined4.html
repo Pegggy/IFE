@@ -241,18 +241,33 @@
 			var direction = deg % -360;
 			var eleft = parseInt(ele.style.left);
 			var etop = parseInt(ele.style.top);
-			
 			if(direction == 0){
-				ele.style.top = etop-blockHeight +'px';
+				if(etop==0){
+					return;
+				}else{
+					ele.style.top = etop-blockHeight +'px';
+				}
 			}if(direction == 90 ||direction == -270){
-				ele.style.left = eleft+blockWidth +'px';
+				if(eleft == 450){
+					return;
+				}else{
+					ele.style.left = eleft+blockWidth +'px';
+				}
 			}if(direction == -90){
-				ele.style.left = eleft-blockWidth +'px';
+				if(eleft == 0){
+					return;
+				}else{
+					ele.style.left = eleft-blockWidth +'px';
+				}
 			}if(direction ==-180){
-				ele.style.top = etop+blockHeight +'px';
+				if(etop == 450){
+					return;
+				}else{
+					ele.style.top = etop+blockHeight +'px';
+				}
 			}
 		}
-	
+
 </script>
 </body>
 </html>
