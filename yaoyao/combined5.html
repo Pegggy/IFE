@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>听指令的小方块2</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;box-sizing:border-box;}
+		table{border-collapse: collapse;}
+		.xpos{margin-left: 50px;}
+		.xpos td{width: 50px;height: 50px;text-align: center;}
+		.ypos{float: left;}
+		.ypos td{width: 50px;height: 50px;text-align: center;}
+		.table{margin-left: 50.4px;position: relative;}
+		.table table{border-top: 1px solid #ccc;border-left: 1px solid #ccc;box-sizing:border-box;}
+		.table tr{width: 500px;height: 50px;display: block;}
+		.table td{width: 50px;height:50px;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;}
+		.table #red{width: 50px;height: 50px;position: absolute;background: red;z-index: 1; }
+		.table #blue{width: 50px;height: 10px;position: absolute;background: blue;z-index: 2;}
+		.table #list{position: absolute;top: 0;left: 530px;}
+		select {margin-left: 240px;margin-top: 20px;}
+		button{width: 50px;height: 21px;font-size: 12px;}
+	</style>
+</head>
+<body>
+<div class="xpos">
+<table>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="ypos">
+<table>
+	<tbody>
+		<tr>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>7</td>
+		</tr>
+		<tr>
+			<td>8</td>
+		</tr>
+		<tr>
+			<td>9</td>
+		</tr>
+		<tr>
+			<td>10</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="table">
+<table cellpadding="0" cellspacing="0" border="0" id="board">
+ 	<div id="red" style="left:300px;top: 300px;">
+		<div id="blue"></div>
+	</div>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<div id="list">
+	<ul>
+		<li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
+		<li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
+		<li>TRA RIG：向屏幕的右侧移动一格，方向不变</li>
+		<li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
+		<li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+		<li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+		<li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+		<li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+	</ul>
+</div>
+</div>
+<select id="order">
+	<option value="tralef">TRA LEF</option>
+	<option value="tratop">TRA TOP</option>
+	<option value="trarig">TRA RIG</option>
+	<option value="trabot">TRA BOT</option>
+	<option value="movlef">MOV LEF</option>
+	<option value="movrig">MOV RIG</option>
+	<option value="movtop">MOV TOP</option>
+	<option value="movbot">MOV BOT</option>
+</select>
+<button id="btn">执行</button>
+<script type="text/javascript">
+		var btn = document.getElementById('btn');
+		var block = document.getElementById('red');
+		var blockWidth = 50;
+		var blockHeight = 50;
+		var deg = 0 ;
+		//平移运动
+		function tra(ele,value){
+		 	var eleft = parseInt(ele.style.left);
+		 	var etop = parseInt(ele.style.top);
+		 	ele.style.transition= "all 1s ease-in-out";
+		 	switch(value){
+		 		case 'tralef':
+		 		if(eleft==0){
+		 			return;
+		 		}
+		 		ele.style.left = eleft-blockWidth +'px';
+		 		break;
+		 		case 'trarig':
+		 		if(eleft==450){
+		 			return;
+		 		}
+		 		ele.style.left = eleft+blockWidth +'px';
+		 		break;
+		 		case 'tratop':
+		 		if(etop==0){
+		 			return;
+		 		}
+		 		ele.style.top = etop-blockHeight +'px';
+		 		break;
+		 		case 'trabot':
+		 		if(etop==450){
+		 			return;
+		 		}
+		 		ele.style.top = etop+blockHeight +'px';
+		 		break;
+		 	}
+		 }
+		 //旋转+移动
+		 function move(ele,value){
+			var eleft = parseInt(ele.style.left);
+			var etop = parseInt(ele.style.top);
+			ele.style.transition= "all 1s ease-in-out";
+			switch(value){
+				case 'movlef':
+				if(eleft==0){
+		 			return;
+		 		}
+				ele.style.transform = "rotate(-90deg)";
+				ele.style.left = eleft-blockWidth +'px';
+				break;
+				case 'movrig':
+				if(eleft==450){
+		 			return;
+		 		}
+				ele.style.transform = "rotate(90deg)";
+				ele.style.left = eleft+blockWidth +'px';
+				break;
+				case 'movtop':
+				if(etop==0){
+		 			return;
+		 		}
+				ele.style.transform = "rotate(0deg)";
+				ele.style.top= etop-blockHeight+'px';
+				break;
+				case 'movbot':
+				if(etop==450){
+		 			return;
+		 		}
+				ele.style.transform = "rotate(-180deg)";
+				ele.style.top = etop+blockHeight +'px';
+				break;
+			}
+		}
+		btn.onclick = function(){
+			var order = document.getElementById('order').value;
+				if(order.indexOf('mov')>=0){
+					move(block,order);
+				}else{
+					tra(block,order);
+				}
+			}
+</script>
+</body>
+</html>
