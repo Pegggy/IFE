@@ -17,6 +17,14 @@
 <span>名称</span>
 <input type="text" name="username" id="username">
 <input type="button" name="username" value="验证" id="btn">
+<div id="rules">
+	校验规则：
+	<ul>
+		<li>字符数为4~16位</li>
+		<li>每个英文字母、数字、英文符号长度为1</li>	
+		<li>每个汉字，中文符号长度为2</li>
+	</ul>
+</div	
 <div id="info"></div>
 <script type="text/javascript">
 	var btn = document.getElementById('btn');
