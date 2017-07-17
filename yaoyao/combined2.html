@@ -71,6 +71,7 @@
 			}
 		}
 	}
+	//检查密码
 	password.onblur = function(){
 		var password_val = password.value;
 		var info_password = document.getElementById('info_password');
@@ -90,6 +91,7 @@
 			}
 		}
 	}
+	//密码确认
 	confirm.onblur = function(){
 		var confirm_val = confirm.value;
 		var info_confirm = document.getElementById('info_confirm');
@@ -103,6 +105,7 @@
 			return false;
 		}
 	}
+	//检查邮箱
 	email.onblur = function(){
 		var email_val = email.value;
 		var info_email = document.getElementById('info_email');
@@ -117,6 +120,7 @@
 			return false;
 		}
 	}
+	//检查手机
 	phone.onblur = function(){
 		var info_phone = document.getElementById('info_phone');
 		var phone_val = phone.value;
@@ -131,6 +135,7 @@
 			return false;
 		}			
 	}
+	//提交
 	btn.onclick = function(){
 		var result = username.onblur()&&password.onblur()&&confirm.onblur()&&email.onblur()&&phone.onblur();
 		if(result){
